@@ -1,10 +1,11 @@
-import './app.css';
+import './app.scss';
+import {Home} from './containers'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Netflix Clone</h1>
-    </div>
+    <>
+      <Home />
+    </>
   );
 }
 
