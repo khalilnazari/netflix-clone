@@ -1,5 +1,6 @@
 import './home.scss'
 import {Featured, Navbar, List} from '../../components'
+
 const Home = () => {
     return (
         <div className='homepage'>

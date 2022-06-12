@@ -1,0 +1,76 @@
+.login {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(41,41,41,0.4935107832195378) 0%, rgba(40,40,40,1) 100%), url('https://i.pinimg.com/originals/67/99/88/6799886e301c323bc202fbdb72376531.jpg');
+    background-size: cover;
+    position: relative;
+
+    .top {
+        .wrapper {
+            padding: 20px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .logo {
+                height: 40px;
+            }
+        }
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    form {
+        width: 450px;
+        height: 400px;
+        background-color: var(--main-color);
+        border-radius: 5px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        input {
+            height: 40px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(73, 71, 71, 0.75);;
+            color: white;
+            padding-left: 10px;
+
+            &::placeholder {
+                color: lightgray;
+            }
+        }
+
+        button {
+            height: 40px;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        span {
+            color: gray;
+            b {
+                color: white;
+            }
+        }
+    }
+}
