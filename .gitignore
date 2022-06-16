@@ -9,14 +9,27 @@
 /client/.pnp
 /client/.pnp.js
 
+/client/node_modules
+/client/.pnp
+/client/.pnp.js
+/api/node_modules
+/api/.pnp
+/api/.pnp.js
 # testing
 /client/coverage
+/api/coverage
 
 # production
 /client/build
+/api/build
 
 # misc
 /api/.env
+/api/.DS_Store
+/api/.env.local
+/api/.env.development.local
+/api/.env.test.local
+/api/.env.production.local
 /client/.DS_Store
 /client/.env.local
 /client/.env.development.local
@@ -26,3 +39,6 @@
 /client/npm-debug.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
+/api/npm-debug.log*
+/api/yarn-debug.log*
+/api/yarn-error.log*
