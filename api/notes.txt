@@ -1,0 +1,24 @@
+pagekcages 
+npm install express mangoose nodemon dotenv jsonwebtoken
+
+nodemon
+add below to package.json 
+"scripts": {
+    "start": "nodemon index.js"
+},
+
+
+
+.ENV 
+npm install dotenv
+in index.js add below
+const dotenv = require('dotenv')
+dotenv.config();
+
+use env variables
+process.env.VARIABLES
+
+
+//mongodb atlas
+1. create database 
+2. > database > select claster/database > connect > connect app > copy link > 
