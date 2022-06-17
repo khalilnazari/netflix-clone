@@ -22,3 +22,10 @@ process.env.VARIABLES
 //mongodb atlas
 1. create database 
 2. > database > select claster/database > connect > connect app > copy link > 
+
+
+for password hashing use 
+crypto-js 
+npm i crypto-js 
+
+
