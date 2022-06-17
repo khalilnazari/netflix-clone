@@ -1,3 +1,5 @@
+// This used anytime a new user register 
+
 const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema(
