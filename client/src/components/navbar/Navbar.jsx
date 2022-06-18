@@ -1,5 +1,5 @@
 import './navbar.scss'
-
+import { Link } from 'react-router-dom';
 import { Notifications, Search, ArrowDropDown} from '@material-ui/icons';
 import {logoImg, khalil} from '../../assets'
 import { useState } from 'react';
@@ -18,11 +18,11 @@ const Navbar = () => {
             <div className="container">
                 <div className="left-col">
                     <img src={logoImg} className="logo-image" alt="logoImg" />
-                    <span className='nav-link'>Homepage</span>
-                    <span className='nav-link'>Series</span>
-                    <span className='nav-link'>Movies</span>
-                    <span className='nav-link'>New and Popular</span>
-                    <span className='nav-link'>My List</span>
+                    <Link className='nav-link' to="/">Homepage</Link>
+                    <Link className='nav-link' to="/series">Series</Link>
+                    <Link className='nav-link' to="/movies">Movies</Link>
+                    <Link className='nav-link' to="/">New and Popular</Link>
+                    <Link className='nav-link' to="/">My List</Link>
                 </div>
 
                 {/* right side */}

@@ -23,3 +23,8 @@ html {
 body {
     background-color: var(--main-color);
 }
+
+a {
+    color: unset;
+    text-decoration: none;
+}

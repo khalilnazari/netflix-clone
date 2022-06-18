@@ -3,7 +3,7 @@ import './register.scss'
 
 const Register = () => {
     const [email, setEmail] = useState(); 
-    const [password, setPassword] = useState(); 
+    // const [password, setPassword] = useState(); 
     const emailRef = useRef(); 
     const passwordRef = useRef(); 
 
