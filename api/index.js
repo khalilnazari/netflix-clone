@@ -7,10 +7,12 @@ app.use(express.json());
 
 // routes
 const authRoute = require("./routes/auth"); 
-const usersRoute = require("./routes/uers");
+const usersRoute = require("./routes/users");
+const movieRoute = require("./routes/movies");
 // use routes
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
+app.use("/api/movies", movieRoute)
 
 
 // mongodb 
