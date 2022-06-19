@@ -1,6 +1,5 @@
 import './featured.scss'
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-import {featuredImage1, featuredImage2} from '../../assets'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
