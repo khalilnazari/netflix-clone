@@ -1,8 +1,32 @@
 import './featured.scss'
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
 import {featuredImage1, featuredImage2} from '../../assets'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 const Featured = ({type}) => {
+    const [randomMovie, setRadnomMovie] = useState({}); 
+    useEffect(() => {
+        const getMovie = async () => {
+            try {
+                const res = await axios.get(`/movies/random?type=${type}`, {
+                    headers: {
+                        token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYWQ1MzdhNGZjYjRhNzA4NjE1MTIwMyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTU2NDYyMSwiZXhwIjoxNjU1NzM3NDIxfQ.eQKXmJdbuUgF-BVSSL8noZ14qHfvO0matfolkZmCqnQ"
+                    }
+                });
+
+                setRadnomMovie(res.data[0]);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        // call get movie
+        getMovie()
+
+    }, [type]) 
+
+    // jsx
     return (
         <div className="featured">
             {type && (
@@ -29,26 +53,23 @@ const Featured = ({type}) => {
             )}
 
             <img className='featured-image'
-                src={featuredImage1}
+                src={randomMovie.img}
                 alt="featuredImage1"
             />
 
             <div className="info">
                 <img className='info-image'
-                    src={featuredImage2}
-                    alt="featuredImage2"
+                    src={randomMovie.imgSm}
+                    alt={randomMovie.title}
                 />
                 <span className="info-desc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-                    adipisci repellendus eum quasi illo, velit numquam, maxime tempora
-                    sint deleniti, aliquid qui? Facilis, adipisci! Ratione hic repudiandae
-                    temporibus eum earum?
+                    {randomMovie.desc}
                 </span>
 
                 <div className="buttons">
                     <button className="play-btn btn">
                         <PlayArrow />
-                        <span className='btn-text'>Play</span>
+                        <Link className='btn-text' to='/watch' state={{movie:randomMovie}}>Play</Link>
                     </button>
                     <button className="more-btn btn">
                         <InfoOutlined />

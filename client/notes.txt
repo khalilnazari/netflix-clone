@@ -1,0 +1,13 @@
+1. Install react app 
+npx create-react-app ./
+
+2. install sass
+npm install sass 
+
+3. install material ui icons and core 
+npm install @material-ui/icons @material-ui/core (--legacy-peer-deps)
+for react 18: npm install @material-ui/icons @material-ui/core --legacy-peer-deps
+
+
+add proxy to package.json
+"proxy": "http://localhost:8800/api/"

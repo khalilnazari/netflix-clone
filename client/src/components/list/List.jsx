@@ -3,10 +3,9 @@ import {ArrowBackIosOutlined, ArrowForwardIosOutlined} from '@material-ui/icons'
 import ListItem from '../listItem/ListItem';
 import { useRef, useState } from 'react';
 
-const List = () => {
+const List = ({list}) => {
     // Ref hook 
     const listRef = useRef();
-    console.log(listRef.current)
 
     // slideNumber 
     const [slideNumber, setSlideNumber] = useState(0); 
@@ -32,7 +31,7 @@ const List = () => {
     // this is a single slider
     return (
         <section className="list">
-            <span className='listTitle'>Continue to watch</span>
+            <span className='listTitle'>{list.title}</span>
             
             {/* slider wrapper */}
             <div className="wrapper">
@@ -44,16 +43,9 @@ const List = () => {
                 />
 
                 <div className="container" ref={listRef}>
-                    <ListItem index={0} />
-                    <ListItem index={1} />
-                    <ListItem index={2} />
-                    <ListItem index={3} />
-                    <ListItem index={4} />
-                    <ListItem index={5} />
-                    <ListItem index={6} />
-                    <ListItem index={7} />
-                    <ListItem index={8} />
-                    <ListItem index={9} />
+                    {list.content.map((item, index) => {
+                        return <ListItem index={index} item={item} key={index}/>
+                    })}
                 </div>
                 
                 {/* right arrow */}
