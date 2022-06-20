@@ -4,10 +4,12 @@
 /api/node_modules
 /api/.pnp
 /api/.pnp.js
-
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
+/admin/node_modules
+/admin/.pnp
+/admin/.pnp.js
 
 /client/node_modules
 /client/.pnp
@@ -18,10 +20,12 @@
 # testing
 /client/coverage
 /api/coverage
+/admin/coverage
 
 # production
 /client/build
 /api/build
+/admin/build
 
 # misc
 /api/.env
@@ -30,11 +34,18 @@
 /api/.env.development.local
 /api/.env.test.local
 /api/.env.production.local
+/client/.env
 /client/.DS_Store
 /client/.env.local
 /client/.env.development.local
 /client/.env.test.local
 /client/.env.production.local
+/admin/.env
+/admin/.DS_Store
+/admin/.env.local
+/admin/.env.development.local
+/admin/.env.test.local
+/admin/.env.production.local
 
 /client/npm-debug.log*
 /client/yarn-debug.log*
@@ -42,3 +53,6 @@
 /api/npm-debug.log*
 /api/yarn-debug.log*
 /api/yarn-error.log*
+/admin/npm-debug.log*
+/admin/yarn-debug.log*
+/admin/yarn-error.log*
