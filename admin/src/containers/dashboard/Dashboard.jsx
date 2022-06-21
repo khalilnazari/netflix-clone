@@ -46,6 +46,10 @@ const Dashboard = () => {
         <div className='dahboard'>
             <FeaturedInfo />
             <Chart data={userStats} title="User Analytics" grid dataKey="New User" />
+            <div className="homeWidgets">
+                <WidgetSmall />
+                <WidgetLarge />
+            </div>
         </div>
     );
 };

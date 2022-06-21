@@ -1,5 +1,12 @@
-.dashboard {
+.dahboard {
     background-color: white;
     min-height: 100vh;
     width: 100%;
+
+    .homeWidgets{
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 20px;
+    }
 }
