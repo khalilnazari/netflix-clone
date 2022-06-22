@@ -5,11 +5,12 @@ import {Sidebar, Topbar} from './components'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
+  const login = false; 
   return (
     <BrowserRouter>
-      <Topbar />
+      {login && <Topbar />}
       <div className="body-container">
-        <Sidebar />
+        {login && <Sidebar />}
         <div className='main-content'>
           <Routes>
             <Route path='/' element={<Dashboard />}/>
@@ -18,7 +19,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/nemmovie' element={<NewMovie />}/>
             <Route path='/movie' element={<Movie />}/>
-            <Route path='/movielist' element={<MovieList />}/>
+            <Route path='/movies' element={<MovieList />}/>
             <Route path='/user' element={<User />}/>
             <Route path='/userlist' element={<UserList />}/>
             <Route path='/newuser' element={<NewUser />}/>
