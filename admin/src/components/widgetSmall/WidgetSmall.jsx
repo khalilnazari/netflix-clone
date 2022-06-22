@@ -10,7 +10,7 @@ const WidgetSmall = () => {
     useEffect(() => {
         const getNewUsers = async () => {
             try {
-                const res = await axios.get("/users", {
+                const res = await axios.get("/users?new=true", {
                     headers: {
                         token:
                         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYWQ1MzdhNGZjYjRhNzA4NjE1MTIwMyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTgxOTA4OCwiZXhwIjoxNjU1OTkxODg4fQ.UJxcyjsbBeOmKrAVepMRCXy1RaFschqDxrsGFqdG2K8",
