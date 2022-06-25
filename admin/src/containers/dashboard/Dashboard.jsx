@@ -1,7 +1,7 @@
 import React from 'react';
 import './dashboard.scss'
 
-import { FeaturedInfo, Sidebar, WidgetLarge, WidgetSmall, Chart} from '../../components'
+import { FeaturedInfo, WidgetLarge, WidgetSmall, Chart} from '../../components'
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 

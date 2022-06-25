@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './topbar.scss'; 
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
-
+import { NotificationsNone, Language, Settings, ExitToApp, PermIdentity, ArrowDropDown } from "@material-ui/icons";
+import {logout} from '../../context/authContext/AuthActions'
+import {AuthContext} from '../../context/authContext/AuthContext'
+import { Link, useNavigate } from 'react-router-dom';
 const Topbar = () => {
+    const {dispatch} = useContext(AuthContext)
+    let navigate = useNavigate(); 
+
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate("/login")
+    }
+
+
     return (
         <div className="topbar">
             <div className="topbarWrapper">
@@ -21,8 +32,17 @@ const Topbar = () => {
                     <div className="topbarIconContainer">
                         <Settings />
                     </div>
-                    <img src="https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png" alt="" className="topAvatar" />
+                    
+
+                    <div className="avatar">
+                        <img src="https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png" alt="" className="topAvatar" />
+                        <ArrowDropDown />
+                        <div className='user-menu'>
+                            <Link to="/profile" className='user-menu__link'><PermIdentity /> Profile</Link>
+                            <span className='user-menu__link' onClick={handleLogout}><ExitToApp/> Logout</span>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
     );

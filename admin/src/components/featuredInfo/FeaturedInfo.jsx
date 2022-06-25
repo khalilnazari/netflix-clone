@@ -1,7 +1,6 @@
 import React from 'react';
 import './featuredInfo.scss'; 
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import Sidebar from '../sidebar/Sidebar';
 
 const FeaturedInfo = () => {
     return (
