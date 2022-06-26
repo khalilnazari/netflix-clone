@@ -68,9 +68,10 @@ export default function MovieList() {
                 return (
                     <>
                         <Link
-                        to={{ pathname: "/movie/" + params.row._id, movie: params.row }}
+                            to={`/movie/${params.row._id}`} 
+                            state={{movie: params.row }}
                         >
-                        <button className="movieListEdit">Edit</button>
+                            <button className="movieListEdit">Edit</button>
                         </Link>
                         <DeleteOutline
                         className="movieListDelete"

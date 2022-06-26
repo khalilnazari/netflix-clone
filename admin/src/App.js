@@ -21,7 +21,7 @@ function App() {
                 <Route path='/list' element={<List />}/>
                 <Route path='/lists' element={<Lists />}/>
                 <Route path='/nemmovie' element={<NewMovie />}/>
-                <Route path='/movie' element={<Movie />}/>
+                <Route path='/movie/:id' element={<Movie />}/>
                 <Route path='/movies' element={<MovieList />}/>
                 <Route path='/user' element={<User />}/>
                 <Route path='/userlist' element={<UserList />}/>
