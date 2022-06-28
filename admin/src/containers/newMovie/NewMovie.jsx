@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import './newMovie.scss';
 import {MovieContext} from '../../context/movieContext/MovieContext';  
 import storage from "../../firebase";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const NewMovie = () => {
     const [movie, setMovie] = useState(null);
@@ -14,13 +15,34 @@ const NewMovie = () => {
 
     const {dispatch} = useContext(MovieContext) // movieContext.js
     
-    
     const upload = (items) => {
-        items.forEarch(item => {
-            const fileName = new Date().getTime() + item.label + item.file.name;
-            const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
 
-            console.log(fileName, uploadTask)
+        items.forEach(item => {
+
+            const fileName = new Date().getTime() + item.label + item.file.name;
+
+            const storageRef = ref(storage, 'items/' + fileName);
+            const uploadTask = uploadBytesResumable(storageRef, item.file);
+
+            // const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+
+            uploadTask.on("state_changed", 
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                }, 
+                (error) => {
+                     console.log(error)
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                        setMovie((prev) => {
+                          return { ...prev, [item.label]: url };
+                        });
+                        setUploaded((prev) => prev + 1);
+                    });
+                }
+            )
         })
 
         // console.log(items)
@@ -32,6 +54,7 @@ const NewMovie = () => {
     }
 
     const handleUpload = (e) => {
+        // console.log(img, imgTitle, imgSm, trailer, video)
         e.preventDefault();
         upload([
             { file: img, label: "img" },
@@ -159,11 +182,11 @@ const NewMovie = () => {
                 </div>
                 {uploaded === 5 ? (
                     <button className="addProductButton" onClick={handleSubmit}>
-                        Create
+                        Create Movie
                     </button>
                 ) : (
                     <button className="addProductButton" onClick={handleUpload}>
-                        Upload
+                        Upload Files
                     </button>
                 )}
             </form>

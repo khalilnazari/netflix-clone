@@ -8,8 +8,6 @@ const Movie = () => {
     const location = useLocation();
     const movie = location.state.movie;
 
-    console.log(movie)
-
     return (
         <div className="movie-detail">
             <div className="productTitleContainer">
@@ -72,7 +70,7 @@ const Movie = () => {
                                 alt=""
                                 className="productUploadImg"
                             />
-                            <label for="file">
+                            <label htmlFor="file">
                                 <Publish />
                             </label>
                             <input type="file" id="file" style={{ display: "none" }} />

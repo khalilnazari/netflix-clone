@@ -18,7 +18,7 @@ const Dashboard = () => {
                 const res = await axios.get("/users/stats", {
                     headers: {
                         token:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTZmYzQ2NDk0Mjc3MTYwNDg4MmMxNiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyNTgzMjMxMSwiZXhwIjoxNjI2MjY0MzExfQ.ATXV-1TTWIGyVBttTQSf0erRWjsgZ8jHQv1ZsUixbng",
+                        "Bearer "+ JSON.parse(localStorage.getItem("user")).accessToken,
                     }
                 });
 

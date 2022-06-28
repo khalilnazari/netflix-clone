@@ -13,7 +13,7 @@ const WidgetSmall = () => {
                 const res = await axios.get("/users?new=true", {
                     headers: {
                         token:
-                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYWQ1MzdhNGZjYjRhNzA4NjE1MTIwMyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTgxOTA4OCwiZXhwIjoxNjU1OTkxODg4fQ.UJxcyjsbBeOmKrAVepMRCXy1RaFschqDxrsGFqdG2K8",
+                        "Bearer "+ JSON.parse(localStorage.getItem("user")).accessToken,
                     },
                 });
                 
