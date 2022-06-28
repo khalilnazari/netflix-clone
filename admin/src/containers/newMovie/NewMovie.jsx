@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import './newMovie.scss';
 import {MovieContext} from '../../context/movieContext/MovieContext';  
 import storage from "../../firebase";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {createMovie} from '../../context/movieContext/apiCalls'; 
 
 const NewMovie = () => {
     const [movie, setMovie] = useState(null);
@@ -15,16 +16,12 @@ const NewMovie = () => {
 
     const {dispatch} = useContext(MovieContext) // movieContext.js
     
+    // upload function
     const upload = (items) => {
-
         items.forEach(item => {
-
             const fileName = new Date().getTime() + item.label + item.file.name;
-
             const storageRef = ref(storage, 'items/' + fileName);
             const uploadTask = uploadBytesResumable(storageRef, item.file);
-
-            // const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
 
             uploadTask.on("state_changed", 
                 (snapshot) => {
@@ -44,18 +41,21 @@ const NewMovie = () => {
                 }
             )
         })
-
-        // console.log(items)
     }
 
+    // feilds state
     const handleChange = (e) => {
         const value = e.target.value;
         setMovie({ ...movie, [e.target.name]: value });
     }
 
+    // upload files
     const handleUpload = (e) => {
-        // console.log(img, imgTitle, imgSm, trailer, video)
         e.preventDefault();
+        if(!img || !imgTitle || !imgSm || !trailer || !video) {
+            alert("upload all fiels")
+            return; 
+        }
         upload([
             { file: img, label: "img" },
             { file: imgTitle, label: "imgTitle" },
@@ -68,8 +68,9 @@ const NewMovie = () => {
     // submit
     const handleSubmit  = (e) => {
         e.preventDefault(); 
-
-        // createMovie(); // come apiCall (movie, dispatch)
+        // console.log("submit movie: ", movie)
+        const res = createMovie(movie, dispatch); // come apiCall (movie, dispatch)
+        console.log(res)
     } 
 
     return (
@@ -77,12 +78,31 @@ const NewMovie = () => {
             <h1 className="addProductTitle">New Movie</h1>
             <form className="addProductForm">
                 <div className="addProductItem">
+                    <label>Trailer</label>
+                    <input
+                        type="file"
+                        name="trailer"
+                        onChange={(e) => setTrailer(e.target.files[0])}
+                        required
+                    />
+                </div>
+                <div className="addProductItem">
+                    <label>Video</label>
+                    <input
+                        type="file"
+                        name="video"
+                        onChange={(e) => setVideo(e.target.files[0])}
+                        required
+                    />
+                </div>
+                <div className="addProductItem">
                     <label>Image</label>
                     <input
                         type="file"
                         id="img"
                         name="img"
                         onChange={(e) => setImg(e.target.files[0])}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -92,6 +112,7 @@ const NewMovie = () => {
                         id="imgTitle"
                         name="imgTitle"
                         onChange={(e) => setImgTitle(e.target.files[0])}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -101,6 +122,7 @@ const NewMovie = () => {
                         id="imgSm"
                         name="imgSm"
                         onChange={(e) => setImgSm(e.target.files[0])}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -110,6 +132,7 @@ const NewMovie = () => {
                         placeholder="John Wick"
                         name="title"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -119,6 +142,7 @@ const NewMovie = () => {
                         placeholder="description"
                         name="desc"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -128,6 +152,7 @@ const NewMovie = () => {
                         placeholder="Year"
                         name="year"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -137,6 +162,7 @@ const NewMovie = () => {
                         placeholder="Genre"
                         name="genre"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -146,6 +172,7 @@ const NewMovie = () => {
                         placeholder="Duration"
                         name="duration"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
@@ -155,31 +182,17 @@ const NewMovie = () => {
                         placeholder="limit"
                         name="limit"
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="addProductItem">
                     <label>Is Series?</label>
-                    <select name="isSeries" id="isSeries" onChange={handleChange}>
+                    <select name="isSeries" id="isSeries" onChange={handleChange} required>
                         <option value="false">No</option>
                         <option value="true">Yes</option>
                     </select>
                 </div>
-                <div className="addProductItem">
-                    <label>Trailer</label>
-                    <input
-                        type="file"
-                        name="trailer"
-                        onChange={(e) => setTrailer(e.target.files[0])}
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>Video</label>
-                    <input
-                        type="file"
-                        name="video"
-                        onChange={(e) => setVideo(e.target.files[0])}
-                    />
-                </div>
+                
                 {uploaded === 5 ? (
                     <button className="addProductButton" onClick={handleSubmit}>
                         Create Movie
