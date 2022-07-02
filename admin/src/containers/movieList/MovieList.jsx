@@ -9,7 +9,6 @@ import { deleteMovie, getMovies } from "../../context/movieContext/apiCalls";
 export default function MovieList() {
     const { movies, dispatch } = useContext(MovieContext);
 
-    console.log(movies)
 
     useEffect(() => {
         getMovies(dispatch);
