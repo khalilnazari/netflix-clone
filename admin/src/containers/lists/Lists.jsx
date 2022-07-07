@@ -1,22 +1,23 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import React, { useContext, useEffect } from 'react';
-import { getLists } from '../../context/listContext/apiCall';
+import React, { useContext, useEffect, useState } from 'react';
+import { deleteLists, getLists } from '../../context/listContext/apiCall';
 import { ListContext } from '../../context/listContext/ListContext';
 import './lists.scss'
 
 
 const Lists = () => {
-    const { lists, dispatch } = useContext(ListContext)
+    const { lists, dispatch, error, message} = useContext(ListContext)
+    
     
     useEffect(() => {
         getLists(dispatch);
     }, [dispatch])
 
 
-    const handleDelete = (e) => {
-        console.log(e)
+    const handleDelete = (id) => {
+      deleteLists(dispatch, id);
     }
     
     // columns
@@ -50,6 +51,7 @@ const Lists = () => {
     
     return (
         <div className="productList">
+          <div className="alert-message">{message}</div>
           <DataGrid
             rows={lists}
             disableSelectionOnClick

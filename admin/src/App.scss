@@ -1,0 +1,24 @@
+.message-alert {
+    padding: 1rem 2rem;
+    margin: 1rem 0;
+    width: max-content;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 11;
+
+    &.success {
+        background-color: #d3ffd3;
+        color: green;
+    }
+
+    &.warning {
+        background-color: #ffffd3;
+        color: rgb(128, 122, 0);
+    }
+
+    &.danger {
+        background-color: #ffd3d3;
+        color: rgb(128, 51, 0);
+    }
+}

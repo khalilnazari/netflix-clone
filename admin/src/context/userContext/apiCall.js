@@ -2,7 +2,6 @@ import {getUsersFailure, getUsersStart, getUsersSuccess} from './UserActions'
 import axios from 'axios';
 
 export const getUsers = async (dispatch) => {
-    console.log("getUers function 999", dispatch)
     // start 
     dispatch(getUsersStart());
 
