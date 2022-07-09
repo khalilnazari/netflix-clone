@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './user.scss';
-
+import {UserContext} from '../../context/userContext/UserContext'
 import {
     CalendarToday,
     MailOutline,
     PermIdentity,
 } from "@material-ui/icons";
+import { updateUser } from '../../context/userContext/apiCall';
 
 
 const User = () => {
-
+    const { dispatch } = useContext(UserContext)
+    const [userUpdate, setUserUpdate] = useState(null);
     const location = useLocation(); 
     const {user} = location.state; 
-    console.log(user)
+
+    const handleChange = (e) => {
+        const value = e.target.value; 
+        setUserUpdate({...userUpdate, [e.target.name]: value})
+    }
+
+    const handlUpdate = (e) => {
+        e.preventDefault();
+        setUserUpdate({...userUpdate, _id: user._id}); 
+        updateUser(userUpdate, dispatch)
+    }
 
     return (
         <div className="user">
@@ -49,12 +61,16 @@ const User = () => {
                             <MailOutline className="userShowIcon" />
                             <span className="userShowInfoTitle">{user.email}</span>
                         </div>
+                        <div className="userShowInfo">
+                            {/* <MailOutline className="userShowIcon" /> */}
+                            <span className="userShowInfoTitle">Admin: {user.isAdmin ? 'Yes': 'No'}</span>
+                        </div>
                     </div>
                 </div>
 
                 <div className="userUpdate">
                     <span className="userUpdateTitle">Edit</span>
-                    <form className="userUpdateForm">
+                    <form className="userUpdateForm" onSubmit={handlUpdate}>
                         <div className="userUpdateLeft">
                             <div className="userUpdateItem">
                                 <label>Username</label>
@@ -62,11 +78,14 @@ const User = () => {
                                     type="text"
                                     placeholder={user.username}
                                     className="userUpdateInput"
+                                    name='username'
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Admin</label>
-                                <select className="userUpdateInput">
+                                <select className="userUpdateInput" onChange={handleChange} name="isAdmin">
+                                    <option value="true">Select Yes for admin</option>
                                     <option value="true">Yes</option>
                                     <option value="false">No</option>
                                 </select>
@@ -77,6 +96,8 @@ const User = () => {
                                     type="text"
                                     placeholder={user.email}
                                     className="userUpdateInput"
+                                    name="email"
+                                    onChange={handleChange}
                                 />
                             </div>
                             

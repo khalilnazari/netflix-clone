@@ -20,7 +20,7 @@ function App() {
                 <Route path='/' element={ <Dashboard /> }/>
                 <Route path='/list' element={<List />}/>
                 <Route path='/lists' element={<Lists />}/>
-                <Route path='/nemmovie' element={<NewMovie />}/>
+                <Route path='/newmovie' element={<NewMovie />}/>
                 <Route path='/movie/:id' element={<Movie />}/>
                 <Route path='/movies' element={<MovieList />}/>
                 <Route path='/user/:id' element={<User />}/>
