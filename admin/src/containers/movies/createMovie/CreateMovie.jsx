@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import './newMovie.scss';
-import {MovieContext} from '../../context/movieContext/MovieContext';  
-import storage from "../../firebase";
+import './createMovie.scss';
+import {MovieContext} from '../../../context/movieContext/MovieContext';  
+import storage from "../../../firebase";
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {createMovie} from '../../context/movieContext/apiCalls'; 
+import {createMovie} from '../../../context/movieContext/apiCalls'; 
 
 const NewMovie = () => {
     const [movie, setMovie] = useState(null);

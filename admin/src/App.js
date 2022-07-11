@@ -1,5 +1,5 @@
 import './App.scss';
-import {Dashboard, List, Lists, Login, NewMovie, Movie, MovieList, User, UserList, NewUser, NewList} from './containers'
+import {Dashboard, Lists, List, UpdateList, CreateList, Movies, Movie, UpdateMovie, CreateMovie, User, Users, UpdateUser, CreateUser, Login} from './containers'
 import {Sidebar, Topbar} from './components'
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { useContext } from 'react';
@@ -18,15 +18,22 @@ function App() {
             {user && 
               <>
                 <Route path='/' element={ <Dashboard /> }/>
-                <Route path='/list' element={<List />}/>
+                
                 <Route path='/lists' element={<Lists />}/>
-                <Route path='/newmovie' element={<NewMovie />}/>
+                <Route path='/list/:id' element={<List />}/>
+                <Route path='/createlist' element={<CreateList />}/>
+                <Route path='/update/:id' element={<UpdateList />}/>
+                
+                <Route path='/movies' element={<Movies />}/>
                 <Route path='/movie/:id' element={<Movie />}/>
-                <Route path='/movies' element={<MovieList />}/>
-                <Route path='/user/:id' element={<User />}/>
-                <Route path='/userlist' element={<UserList />}/>
-                <Route path='/newuser' element={<NewUser />}/>
-                <Route path='/newlist' element={<NewList />}/>  
+                <Route path='/createmovie' element={<CreateMovie />}/>
+                <Route path='/updatemovie' element={<UpdateMovie />}/>
+                
+                <Route path='/users' element={<Users />}/>  
+                <Route path='/user' element={<User />}/>  
+                <Route path='/updateuser' element={<UpdateUser />}/>  
+                <Route path='/createuser' element={<CreateUser />}/>  
+                <Route path='*' element={<div>Page not found</div>}/>
               </>
             }
           </Routes>

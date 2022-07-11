@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import './userList.scss'
+import './users.scss'
 import { UserContext } from '../../context/userContext/UserContext'
 import {getUsers} from '../../context/userContext/apiCall';
 import {Link} from 'react-router-dom';

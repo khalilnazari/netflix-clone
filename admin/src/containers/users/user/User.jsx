@@ -1,14 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './user.scss';
-import {UserContext} from '../../context/userContext/UserContext'
-import {
-    CalendarToday,
-    MailOutline,
-    PermIdentity,
-} from "@material-ui/icons";
-import { updateUser } from '../../context/userContext/apiCall';
-
+import {UserContext} from '../../../context/userContext/UserContext'
+import { CalendarToday, MailOutline, PermIdentity } from "@material-ui/icons";
+import { updateUser } from '../../../context/userContext/apiCall';
+import { useEffect } from 'react';
 
 const User = () => {
     const { dispatch } = useContext(UserContext)
@@ -20,10 +16,13 @@ const User = () => {
         const value = e.target.value; 
         setUserUpdate({...userUpdate, [e.target.name]: value})
     }
+    useEffect(() => {
+        setUserUpdate({_id:user._id})
+    }, [user._id])
 
     const handlUpdate = (e) => {
         e.preventDefault();
-        setUserUpdate({...userUpdate, _id: user._id}); 
+        setUserUpdate(userUpdate); 
         updateUser(userUpdate, dispatch)
     }
 
@@ -100,7 +99,6 @@ const User = () => {
                                     onChange={handleChange}
                                 />
                             </div>
-                            
                         </div>
                         <div className="userUpdateRight">
                             <button className="userUpdateButton">Update</button>

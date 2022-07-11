@@ -1,5 +1,5 @@
 import React from 'react';
-import './newUser.scss';
+import './createUser.scss';
 
 const NewUser = () => {
     return (
