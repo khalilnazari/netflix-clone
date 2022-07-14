@@ -1,14 +1,11 @@
 import React from 'react';
 import './movie.scss'; 
 import { Link, useLocation } from "react-router-dom";
-import { Publish } from "@material-ui/icons";
 
 
 const Movie = () => {
     const location = useLocation();
-    const movie = location.state.movie;
-
-    console.log(movie)
+    const { movie} = location.state;
 
     return (
         <div className="movie-detail">

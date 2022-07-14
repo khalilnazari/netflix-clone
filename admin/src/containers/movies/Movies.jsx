@@ -5,17 +5,27 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import { deleteMovie, getMovies } from "../../context/movieContext/apiCalls";
+import { getMovies2 } from "../../redux/data/moviesData";
+
+import { useSelector, useDispatch } from "react-redux";
 
 export default function MovieList() {
-    const { movies, dispatch } = useContext(MovieContext);
-
-
+    // const { movies, dispatch } = useContext(MovieContext);
+    const {movies} = useSelector((state) => state.movies);
+    if(!movies) {
+        console.log("fetching.....")
+    }
+    const dispatch = useDispatch(); 
+    
     useEffect(() => {
-        getMovies(dispatch);
+        getMovies2(dispatch)
+        // getMovies(dispatch);
+        
+        
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        deleteMovie(id, dispatch);
+        console.log(id)
     };
 
 
@@ -68,7 +78,7 @@ export default function MovieList() {
                     <>
                         <Link
                             to={`/movie/${params.row._id}`} 
-                            state={{movie: params.row }}
+                            state={{movie: params.row, id:params.row._id }}
                         >
                             <button className="movieListEdit">Edit</button>
                         </Link>
@@ -83,7 +93,6 @@ export default function MovieList() {
     ];
 
     return (
-
         <div className="movieList">
             <DataGrid
                 height='500px'
