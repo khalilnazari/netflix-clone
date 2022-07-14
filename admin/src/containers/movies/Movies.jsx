@@ -2,32 +2,25 @@ import "./movies.scss";
 import { DataGrid} from '@material-ui/data-grid';
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { MovieContext } from "../../context/movieContext/MovieContext";
-import { deleteMovie, getMovies } from "../../context/movieContext/apiCalls";
+import { useEffect } from "react";
 import { getMovies2 } from "../../redux/data/moviesData";
-
 import { useSelector, useDispatch } from "react-redux";
 
 export default function MovieList() {
-    // const { movies, dispatch } = useContext(MovieContext);
     const {movies} = useSelector((state) => state.movies);
+    const dispatch = useDispatch(); 
+
     if(!movies) {
         console.log("fetching.....")
     }
-    const dispatch = useDispatch(); 
     
     useEffect(() => {
-        getMovies2(dispatch)
-        // getMovies(dispatch);
-        
-        
-    }, [dispatch]);
+        getMovies2(dispatch);
+    }, [movies]);
 
     const handleDelete = (id) => {
         console.log(id)
     };
-
 
     const columns = [
         { 

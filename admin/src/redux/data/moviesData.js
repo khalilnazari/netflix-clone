@@ -13,14 +13,15 @@ export const getMovies2 = async (dispatch) => {
 }
 
 
-// export const createMovie = async (data, dispatch) => {
-//     try {
-//         const res = await getMoviesAPI(data); 
-//         dispatch(createMovie(res))
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+export const createMovie2 = async (data, dispatch) => {
+    console.log(data);
+    try {
+        const res = await createMovieAPI(data); 
+        dispatch(createMovie(res.data))
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // export const updateMovie = async (dispatch) => {
 //     try {

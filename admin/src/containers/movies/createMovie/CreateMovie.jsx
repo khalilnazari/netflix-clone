@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './createMovie.scss';
-import {MovieContext} from '../../../context/movieContext/MovieContext';  
 import storage from "../../../firebase";
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {createMovie} from '../../../context/movieContext/apiCalls'; 
+import { useDispatch } from 'react-redux';
+import { createMovie2 } from '../../../redux/data/moviesData';
 
 const NewMovie = () => {
     const [movie, setMovie] = useState(null);
@@ -13,8 +13,9 @@ const NewMovie = () => {
     const [trailer, setTrailer] = useState(null);
     const [video, setVideo] = useState(null);
     const [uploaded, setUploaded] = useState(0);
-
-    const {dispatch} = useContext(MovieContext) // movieContext.js
+    const [fileUploadProgress, setFileUploadProgress] = useState(0); 
+    const [displayFileProgress, setDisplayFileProgress] = useState('none');
+    const dispatch = useDispatch(); 
     
     // upload function
     const upload = (items) => {
@@ -25,8 +26,9 @@ const NewMovie = () => {
 
             uploadTask.on("state_changed", 
                 (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
+                    const progress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                    setFileUploadProgress(progress); 
+                    setDisplayFileProgress('block')
                 }, 
                 (error) => {
                      console.log(error)
@@ -52,6 +54,7 @@ const NewMovie = () => {
     // upload files
     const handleUpload = (e) => {
         e.preventDefault();
+        
         if(!img || !imgTitle || !imgSm || !trailer || !video) {
             alert("upload all fiels")
             return; 
@@ -67,15 +70,17 @@ const NewMovie = () => {
 
     // submit
     const handleSubmit  = (e) => {
-        e.preventDefault(); 
-        // console.log("submit movie: ", movie)
-        const res = createMovie(movie, dispatch); // come apiCall (movie, dispatch)
-        console.log(res)
+        e.preventDefault();
+        createMovie2(movie, dispatch); 
     } 
 
     return (
         <div className="newProduct">
             <h1 className="addProductTitle">New Movie</h1>
+            <div style={{"display":`${displayFileProgress}`, "margin": "2 auto"}}>
+                <label for="file">Uploading Files</label>
+                <progress id="file" value={fileUploadProgress} max="100" style={{"width":"80%"}}></progress>
+            </div>
             <form className="addProductForm">
                 <div className="addProductItem">
                     <label>Trailer</label>

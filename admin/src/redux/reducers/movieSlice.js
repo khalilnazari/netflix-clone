@@ -16,7 +16,7 @@ const movieSlice = createSlice({
         }, 
 
         createMovie: (state, action) => {
-            state = [...state, action.payload ];
+            state.movies = [...state.movies, action.payload ];
         },
 
         // action.payload is object {movie, id}
