@@ -1,19 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './topbar.scss'; 
 import { NotificationsNone, Language, Settings, ExitToApp, PermIdentity, ArrowDropDown } from "@material-ui/icons";
-import {logout} from '../../context/authContext/AuthActions'
-import {AuthContext} from '../../context/authContext/AuthContext'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 const Topbar = () => {
-    const {dispatch} = useContext(AuthContext)
-    let navigate = useNavigate(); 
-
     const handleLogout = () => {
-        dispatch(logout())
-        navigate("/login")
+       
     }
-
-
     return (
         <div className="topbar">
             <div className="topbarWrapper">

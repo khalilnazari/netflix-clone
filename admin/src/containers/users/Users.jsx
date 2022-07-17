@@ -1,24 +1,37 @@
-import React, { useContext, useEffect } from 'react';
-import './users.scss'
-import { UserContext } from '../../context/userContext/UserContext'
-import {getUsers} from '../../context/userContext/apiCall';
+import React, {useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux'
+import { getUsers2 } from '../../redux/data/usersData';
 import {Link} from 'react-router-dom';
+import './users.scss'
 import { DeleteOutline } from "@material-ui/icons";
 import { DataGrid } from "@material-ui/data-grid";
+import { useState } from 'react';
+import { getUsersAPI } from '../../redux/api/api';
+import { getUsers } from '../../redux/reducers/userSlice';
 
 const UserList = () => {
-    const {users, dispatch} = useContext(UserContext); 
+    const dispatch = useDispatch(); 
+    const users  = useSelector(state => state.users.users);
+    console.log(users)
+
+    const usersList = async () => {
+        try {
+            const res = await getUsersAPI(); 
+            dispatch(getUsers(res.data));
+        } catch (error) {
+            console.log(error)
+            return error; 
+        }
+    }
 
     useEffect(() => {
-        getUsers(dispatch)
-    },[dispatch])
-
+        usersList(); 
+    }, [dispatch])
 
     const handleDelete = (id) => {
         console.log(id)
     };
       
-
     const columns = [
         { field: "_id", headerName: "ID", width: 190 },
         {

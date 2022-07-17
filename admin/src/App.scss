@@ -22,3 +22,75 @@
         color: rgb(128, 51, 0);
     }
 }
+
+
+.btn {
+    border: 1px solid transparent;
+    color: black;
+    padding: 0.5rem 1.2rem;
+    font-size: .9rem;
+    border-radius: 0.23rem;
+    font-weight: 400;
+    cursor: pointer;
+
+    &.btn-primary {
+        border: 1px solid #3b75d2;
+        background-color: #3b75d2;
+        color: white;
+    }
+
+    &.btn-danger {
+        border: 1px solid rgb(211, 55, 55);
+        background-color: rgb(211, 55, 55);
+        color: white;
+    }
+
+    &.btn-success {
+        border: 1px solid #3fa935;
+        background-color: #3fa935;
+        color: white;
+    }
+}
+
+
+.form-control {
+    margin-bottom: 1.5rem;
+
+    input, select {
+        display: block;
+        width: 100%;
+        padding: .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+    }
+    input:focus , select:focus {
+        outline: 1px solid #b1b1b1;
+    }
+
+    label {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: .4rem;
+        display: block;
+    }
+
+    &.btns {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 2rem;
+    }
+
+
+
+}
+
+
+// page header 
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

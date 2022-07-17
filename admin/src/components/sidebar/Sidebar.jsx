@@ -32,7 +32,7 @@ const Sidebar = () => {
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">Quick Menu</h3>
                     <ul className="sidebarList">
-                        <Link to="/userlist" className="link">
+                        <Link to="/users" className="link">
                             <li className="sidebarListItem">
                                 <PermIdentity className="sidebarIcon" />
                                 Users
@@ -50,13 +50,13 @@ const Sidebar = () => {
                                 Lists
                             </li>
                         </Link>
-                        <Link to="/newMovie" className="link">
+                        <Link to="/createmovie" className="link">
                             <li className="sidebarListItem">
                                 <AddToQueue className="sidebarIcon" />
                                 Add Movie
                             </li>
                         </Link>
-                        <Link to="/newList" className="link">
+                        <Link to="/createlist" className="link">
                             <li className="sidebarListItem">
                                 <QueuePlayNext className="sidebarIcon" />
                                 Add List

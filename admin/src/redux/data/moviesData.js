@@ -1,12 +1,21 @@
-import { getMoviesss, updateMovie, createMovie, deleteMovie } from '../reducers/movieSlice'
+import { 
+    getMovies, 
+    // updateMovie, 
+    createMovie, 
+    // deleteMovie 
+} from '../reducers/movieSlice'
 
-import {getMoviesAPI, createMovieAPI, updateMovieAPI, deleteMovieAPI} from '../api/api'
+import {
+    getMoviesAPI, 
+    createMovieAPI, 
+    // updateMovieAPI, 
+    // deleteMovieAPI
+} from '../api/api'
 
-export const getMovies2 = async (dispatch) => {
+export const getMoviesData = async (dispatch) => {
     try {
         const res = await getMoviesAPI(); 
-        dispatch(getMoviesss(res.data))
-        // console.log(res.data)
+        dispatch(getMovies(res.data))
     } catch (error) {
         console.log(error)
     }

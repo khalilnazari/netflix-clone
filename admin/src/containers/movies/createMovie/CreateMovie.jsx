@@ -3,7 +3,9 @@ import './createMovie.scss';
 import storage from "../../../firebase";
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useDispatch } from 'react-redux';
-import { createMovie2 } from '../../../redux/data/moviesData';
+import { getMovies } from '../../../redux/reducers/movieSlice';
+import { async } from '@firebase/util';
+import { createMovieAPI } from '../../../redux/api/api';
 
 const NewMovie = () => {
     const [movie, setMovie] = useState(null);
@@ -59,6 +61,7 @@ const NewMovie = () => {
             alert("upload all fiels")
             return; 
         }
+        
         upload([
             { file: img, label: "img" },
             { file: imgTitle, label: "imgTitle" },
@@ -68,17 +71,26 @@ const NewMovie = () => {
         ]);
     }
 
+    const addMovie = async (movie) => {
+        try {
+            const res = await createMovieAPI(movie); 
+            dispatch(getMovies(res.data))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     // submit
     const handleSubmit  = (e) => {
         e.preventDefault();
-        createMovie2(movie, dispatch); 
+        addMovie(movie); 
     } 
 
     return (
         <div className="newProduct">
             <h1 className="addProductTitle">New Movie</h1>
             <div style={{"display":`${displayFileProgress}`, "margin": "2 auto"}}>
-                <label for="file">Uploading Files</label>
+                <label htmlFor="file">Uploading Files</label>
                 <progress id="file" value={fileUploadProgress} max="100" style={{"width":"80%"}}></progress>
             </div>
             <form className="addProductForm">

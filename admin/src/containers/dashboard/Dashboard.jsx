@@ -1,9 +1,7 @@
-import React from 'react';
-import './dashboard.scss'
-
+import React, { useEffect, useMemo, useState } from 'react';
 import { FeaturedInfo, WidgetLarge, WidgetSmall, Chart} from '../../components'
-import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import './dashboard.scss'
+import { getUsersAPI } from '../../redux/api/api';
 
 
 const Dashboard = () => {
@@ -12,33 +10,29 @@ const Dashboard = () => {
 
     const [userStats, setUserStats] = useState([]);
 
+    const getStats = async () => {
+        try {
+            const res = await getUsersAPI("/stats"); 
+
+            // sort months
+            const statsList = res.data.sort(function (a, b) {
+                return a._id - b._id;
+            });
+
+            statsList.map((item) =>
+                setUserStats((prevData) => [
+                    ...prevData,
+                    { name: MONTHS[item._id - 1], "New User": item.total },
+                ])
+            );
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
     useEffect(() => {
-        const getStats = async () => {
-            try {
-                const res = await axios.get("/users/stats", {
-                    headers: {
-                        token:
-                        "Bearer "+ JSON.parse(localStorage.getItem("user")).accessToken,
-                    }
-                });
-
-                // sort months
-                const statsList = res.data.sort(function (a, b) {
-                    return a._id - b._id;
-                });
-
-                statsList.map((item) =>
-                    setUserStats((prevData) => [
-                        ...prevData,
-                        { name: MONTHS[item._id - 1], "New User": item.total },
-                    ])
-                );
-
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
         getStats();
     }, [MONTHS]);
 

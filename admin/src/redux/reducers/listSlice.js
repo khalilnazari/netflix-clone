@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = []; 
+const initialState = {
+    lists: [], 
+    pending: false, 
+    error: false,
+}; 
 
 const listSlice = createSlice({
     name: "lists", 
@@ -8,7 +12,7 @@ const listSlice = createSlice({
 
     reducers: {
         getLists: (state, action) => {
-            state = action.payload;
+            state.lists = action.payload;
         }, 
 
         createList: (state, action) => {

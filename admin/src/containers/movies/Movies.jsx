@@ -1,27 +1,38 @@
+import React, { useEffect } from "react";
 import "./movies.scss";
-import { DataGrid} from '@material-ui/data-grid';
+import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { getMovies2 } from "../../redux/data/moviesData";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { getMoviesAPI } from "../../redux/api/api";
+import { getMovies } from "../../redux/reducers/movieSlice";
 
 export default function MovieList() {
-    const {movies} = useSelector((state) => state.movies);
+    const { movies } = useSelector((state) => state.movies);
     const dispatch = useDispatch(); 
+    console.log(movies)
 
-    if(!movies) {
-        console.log("fetching.....")
+    // fetch movies and update store
+    const moviesData = async () => {
+        try {
+            const res = await getMoviesAPI(); 
+            dispatch(getMovies(res.data)); 
+        } catch (error) {
+            console.log(error)
+        }
     }
-    
-    useEffect(() => {
-        getMovies2(dispatch);
-    }, [movies]);
 
+    useEffect(() => {
+        moviesData(); 
+    }, [dispatch]);
+
+
+    // delete movie
     const handleDelete = (id) => {
         console.log(id)
     };
-
+   
+    // DataGrid  column setup
     const columns = [
         { 
             field: "_id", 

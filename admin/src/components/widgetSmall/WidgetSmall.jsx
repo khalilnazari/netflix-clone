@@ -3,28 +3,22 @@ import './widgetSmall.scss';
 import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getUsersAPI } from '../../redux/api/api';
 
 const WidgetSmall = () => {
     const [newUsers, setNewUsers] = useState([]);
 
-    useEffect(() => {
-        const getNewUsers = async () => {
-            try {
-                const res = await axios.get("/users?new=true", {
-                    headers: {
-                        token:
-                        "Bearer "+ JSON.parse(localStorage.getItem("user")).accessToken,
-                    },
-                });
-                
-                setNewUsers(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
+    const getNewUsers = async () => {
+        try {
+            const res = await getUsersAPI("?new=true");
+            setNewUsers(res.data); 
+        } catch (error) {
+            console.log(error)
+        } 
+    }
 
-        // console.log("NewUsers: ", newUsers)
-        getNewUsers();
+    useEffect(() => {
+        getNewUsers(); 
     }, []);
     
     return (
@@ -32,7 +26,7 @@ const WidgetSmall = () => {
             <span className="widgetSmTitle">New Join Members</span>
             <ul className="widgetSmList">
                 {newUsers.map((user) => (
-                    <li className="widgetSmListItem">
+                    <li className="widgetSmListItem" key={user._id}>
                         <img src={ user.profilePic || "https://i.pinimg.com/originals/b4/0f/9f/b40f9f8fc0fb88aabf2a8acbc39c0ac0.png" } alt="" className="widgetSmImg"/>
                         <div className="widgetSmUser">
                             <span className="widgetSmUsername">{user.username}</span>

@@ -3,6 +3,14 @@
     margin: 1rem;
     position: relative;
     
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+
     .productListItem{
         display: flex;
         align-items: center;
