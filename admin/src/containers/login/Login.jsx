@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {Navigate} from 'react-router-dom';
+import { checkLogin } from '../../auth/authServices';
 import { loginAPI } from '../../redux/api/api';
-import { login } from '../../redux/reducers/loginSlice';
+import { loginAction } from '../../redux/reducers/authSlice';
 import './login.scss'; 
 
 const Login = () => {
@@ -10,33 +12,52 @@ const Login = () => {
     const [password, setPassword] = useState(''); 
     const [loginStatus, setLoginStatus] = useState(false); 
     const dispatch = useDispatch(); 
-
+    
     const userLogin = async (data) => {
         try {
             const res = await loginAPI(data);
             
             // update redux store
-            dispatch(login(res.data)); 
+            dispatch(loginAction(res.data)); 
             
-            // set local storage 
-            localStorage.setItem("userToken", res.data.accessToken);
-            setLoginStatus(true);
+            // set local storage
+            localStorage.setItem("nf-auth", JSON.stringify(res.data));
+            
+            // console.log("token 999: ",token)
+            // setLoginStatus(true);
+            // console.log(res.data)
+            console.log(res.data)
+            return res; 
 
         } catch (error) {
-            console.log(error); 
-            setLoginStatus(false);
+            // console.log(error);
+            // dispatch(getLogin(error.response));
+            // setLoginStatus(false);
+            return error.response; 
         }
     }
 
+    useEffect(() => {
+        // console.log(localStorage.getItem("userToken"))
+        // const res = userLogin();
+        // console.log(res)
+        
+    }, [])
+
     const handLogin = (e) => {
         e.preventDefault();
+        // localStorage.clear();
         userLogin({email, password}); 
     }
 
-    const userToken = localStorage.getItem("userToken")
-    if(userToken) {
-        return (<Navigate to="/" replace={true} />)
+    const check = () => {
+        checkLogin(); 
     }
+
+    // const userToken = localStorage.getItem("userToken")
+    // if(userToken) {
+    //     return (<Navigate to="/" replace={true} />)
+    // }
 
     return (
         <div className='login'>
@@ -48,6 +69,7 @@ const Login = () => {
                     <input type="password" name='password' placeholder='password' onChange={e=>setPassword(e.target.value)} autoComplete="true"/>
                     <button type='submit' className='submitBtn' onClick={handLogin}>Submit</button>
                 </form>
+                <button onClick={check}>Checklogin</button>
             </div>
         </div>
     );

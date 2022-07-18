@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const getHeader = () => {
+    const token = JSON.parse(localStorage.getItem('nf-auth')).accessToken; 
+
     const header =  {
-        headers: { token: "Bearer " + localStorage.getItem('userToken') }
+        headers: { token: "Bearer " + token }
     };
 
     return header; 

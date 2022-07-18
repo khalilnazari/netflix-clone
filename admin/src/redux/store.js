@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import movieSlice from "./reducers/movieSlice";
 import userSlice from "./reducers/userSlice";
 import listSlice from "./reducers/listSlice";
-import loginSlice from './reducers/loginSlice';
+import authSlice from './reducers/authSlice';
 
 
 export default configureStore({
@@ -11,7 +11,7 @@ export default configureStore({
     movies: movieSlice,
     users: userSlice,
     lists: listSlice,
-    login: loginSlice
+    auth: authSlice
   },
 });
 

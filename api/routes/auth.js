@@ -41,15 +41,21 @@ router.post('/login', async (req, res) => {
     // check if password match 
     originalPassword !== req.body.password && res.status(401).json("Wrong username or password!")
 
+    // calculate token expiry date
+    const now = new Date().getTime(); 
+    // console.log(now)
+    const tokenExpiryDate =  now + 30000; 
+
     // create access token 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin }, 
       process.env.SECRET_KEY, 
-      {expiresIn: "2d"}
+      // {expiresIn: process.env.JWT_EXPIRES_IN +"h"}
+      {expiresIn: tokenExpiryDate+"s"}
     )
     // destructure password and the rest
     const {password, ...info }=user._doc; 
-    res.status(200).json({...info, accessToken })
+    res.status(200).json({...info, accessToken, timer:tokenExpiryDate })
     // respond 
   } catch (error) {
     res.status(500).json(error)
